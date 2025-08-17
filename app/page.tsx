@@ -270,6 +270,8 @@ export default function HomePage() {
                         <Image
                           src={service.image}
                           alt={service.title}
+                          width={400}
+                          height={320}
                           className="w-full h-80 object-cover "
                         />
                       </motion.div>

@@ -1,103 +1,110 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Phone, Mail, Clock, Send, CheckCircle } from "lucide-react"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Phone, Mail, Clock, Send, CheckCircle } from "lucide-react";
+
+type Errors = Record<string, string>;
 
 export default function ContactPage() {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
+  const [serverError, setServerError] = useState<string>("");
+
+  // honeypot (hidden) for bots
+  const [honey, setHoney] = useState("");
+
+  // Prefill from query: service + price
+  const serviceQP = searchParams.get("service");
+  const priceQP = searchParams.get("price");
 
   useEffect(() => {
-    const service = searchParams.get("service")
-    const price = searchParams.get("price")
+    if (serviceQP) {
+      const subject = `Inquiry about ${serviceQP} service`;
+      let message = `Hi DevTeen team,\n\nI'm interested in your ${serviceQP} service`;
+      if (priceQP) message += ` (starting from ${priceQP})`;
+      message +=
+        `. I would like to discuss my project requirements and get more information about:\n\n` +
+        `- Project timeline\n- Detailed pricing\n- Your development process\n- Next steps\n\n` +
+        `Please let me know when we can schedule a consultation.\n\nThank you!`;
 
-    if (service) {
-      const subject = `Inquiry about ${service} service`
-      let message = `Hi DevTeen team,\n\nI&apos;m interested in your ${service} service`
-
-      if (price) {
-        message += ` (starting from ${price})`
-      }
-
-      message += `. I would like to discuss my project requirements and get more information about:\n\n- Project timeline\n- Detailed pricing\n- Your development process\n- Next steps\n\nPlease let me know when we can schedule a consultation.\n\nThank you!`
-
-      setFormData((prev) => ({
-        ...prev,
-        subject,
-        message,
-      }))
+      setFormData((prev) => ({ ...prev, subject, message }));
     }
-  }, [searchParams])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serviceQP, priceQP]);
 
   const validateForm = () => {
-    const newErrors: Record<string, string> = {}
+    const newErrors: Errors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required"
-    }
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Please enter a valid email address";
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required"
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address"
-    }
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    else if (formData.message.trim().length < 10)
+      newErrors.message = "Message must be at least 10 characters long";
 
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required"
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required"
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters long"
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+    setServerError("");
 
-    if (!validateForm()) {
-      return
-    }
+    if (!validateForm()) return;
 
-    setIsSubmitting(true)
-
-    // Simulate form submission
+    setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      setIsSubmitted(true)
-      setFormData({ name: "", email: "", subject: "", message: "" })
-    } catch (error) {
-      console.error("Form submission error:", error)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          service: serviceQP,
+          price: priceQP,
+          honey, // honeypot
+        }),
+      });
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }))
+      if (res.ok) {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setHoney("");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        if (data?.errors) setErrors(data.errors);
+        setServerError(data?.error || "Failed to send message.");
+      }
+    } catch (error) {
+      setServerError("Network error. Please try again.");
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
-  }
+  };
+
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+  };
 
   if (isSubmitted) {
     return (
@@ -113,18 +120,18 @@ export default function ContactPage() {
           </CardContent>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen  bg-background py-20 px-4">
-      <div className="container  mx-auto max-w-6xl">
+    <div className="min-h-screen bg-background py-20 px-4">
+      <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Get in Touch</h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Ready to start your project? Have questions about our services? We&apos;d love to hear from you. Let&apos;s discuss
-            how we can help bring your vision to life.
+            Ready to start your project? Have questions about our services? We&apos;d love to hear from you.
+            Let&apos;s discuss how we can help bring your vision to life.
           </p>
         </div>
 
@@ -135,27 +142,37 @@ export default function ContactPage() {
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
                 <CardDescription>
-                  {searchParams.get("service")
-                    ? `Interested in our ${searchParams.get("service")} service? Fill out the form below and we&apos;ll get back to you with detailed information.`
-                    : "Fill out the form below and we&apos;ll get back to you as soon as possible."}
+                  {serviceQP
+                    ? `Interested in our ${serviceQP} service? Fill out the form below and we'll get back to you with detailed information.`
+                    : "Fill out the form below and we'll get back to you as soon as possible."}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {searchParams.get("service") && (
+                {serviceQP && (
                   <div className="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
                     <h3 className="font-semibold text-foreground mb-2">Service Inquiry</h3>
                     <div className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        Service: <strong>{searchParams.get("service")}</strong>
+                        Service: <strong>{serviceQP}</strong>
                       </span>
-                      {searchParams.get("price") && (
-                        <span className="text-primary font-semibold">{searchParams.get("price")}</span>
+                      {priceQP && (
+                        <span className="text-primary font-semibold">{priceQP}</span>
                       )}
                     </div>
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot (hidden) */}
+                  <input
+                    type="text"
+                    value={honey}
+                    onChange={(e) => setHoney(e.target.value)}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name *</Label>
@@ -165,6 +182,7 @@ export default function ContactPage() {
                         onChange={(e) => handleInputChange("name", e.target.value)}
                         placeholder="Your full name"
                         className={errors.name ? "border-destructive" : ""}
+                        aria-invalid={!!errors.name}
                       />
                       {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                     </div>
@@ -177,6 +195,7 @@ export default function ContactPage() {
                         onChange={(e) => handleInputChange("email", e.target.value)}
                         placeholder="your@email.com"
                         className={errors.email ? "border-destructive" : ""}
+                        aria-invalid={!!errors.email}
                       />
                       {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                     </div>
@@ -190,6 +209,7 @@ export default function ContactPage() {
                       onChange={(e) => handleInputChange("subject", e.target.value)}
                       placeholder="What's this about?"
                       className={errors.subject ? "border-destructive" : ""}
+                      aria-invalid={!!errors.subject}
                     />
                     {errors.subject && <p className="text-sm text-destructive">{errors.subject}</p>}
                   </div>
@@ -203,14 +223,17 @@ export default function ContactPage() {
                       placeholder="Tell us about your project or ask us anything..."
                       rows={6}
                       className={errors.message ? "border-destructive" : ""}
+                      aria-invalid={!!errors.message}
                     />
                     {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
                   </div>
 
+                  {serverError && (
+                    <p className="text-sm text-destructive -mt-2">{serverError}</p>
+                  )}
+
                   <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      "Sending..."
-                    ) : (
+                    {isSubmitting ? "Sending..." : (
                       <>
                         Send Message
                         <Send className="ml-2 h-4 w-4" />
@@ -224,15 +247,12 @@ export default function ContactPage() {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            {/* Contact Details */}
             <Card className="border-border/50">
               <CardHeader>
                 <CardTitle className="text-xl">Contact Information</CardTitle>
                 <CardDescription>Reach out to us through any of these channels.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                
-
                 <div className="flex items-start space-x-4">
                   <Phone className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                   <div>
@@ -264,13 +284,9 @@ export default function ContactPage() {
                 </div>
               </CardContent>
             </Card>
-
-            
-
-            
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
