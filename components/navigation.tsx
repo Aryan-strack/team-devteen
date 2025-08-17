@@ -56,8 +56,8 @@ export function Navigation() {
               />
               
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-amber-300 to-yellow-300 bg-clip-text text-transparent tracking-tight">
-              DevTeen
+            <span className="text-[18px] font-bold bg-gradient-to-r from-amber-300 to-yellow-300 bg-clip-text text-transparent tracking-tight">
+              DevTeen Technologies
             </span>
           </Link>
 

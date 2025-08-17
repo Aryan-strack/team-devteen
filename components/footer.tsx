@@ -54,7 +54,7 @@ export function Footer() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <Code2 className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-foreground">DevTeen</span>
+              <span className="text-xl font-bold text-foreground">DevTeen Technologies</span>
             </div>
 
             {/* Contact Info */}
