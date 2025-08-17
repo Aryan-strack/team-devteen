@@ -20,11 +20,12 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "DevTeen - Professional Software Development Services",
+  title: "DevTeen - Software Development Services",
   description:
     "Leading software development agency specializing in web development, mobile apps, UI/UX design, and AI solutions. Transform your ideas into powerful digital experiences.",
   generator: "v0.app",
   keywords: "software development, web development, mobile apps, UI/UX design, AI solutions, startup agency",
+  
 }
 
 export default function RootLayout({
@@ -34,6 +35,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+      <head>
+        <link rel="icon" type="image/png" href="/logo.png" sizes="52x52" />
+        
+        <meta name="theme-color" content="#1e293b" />
+      </head>
       <body className="font-sans antialiased">
         <Navigation />
         <main className="pt-16">{children}</main>
