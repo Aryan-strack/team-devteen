@@ -129,17 +129,18 @@ const techStack = [
 export default function HomePage() {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen">
         {/* Hero Section */}
-        <section className="relative overflow-hidden  from-gray-900 via-gray-950 to-gray-900 py-24 px-4 ">
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#0A2342] via-[#081a33] to-[#0A2342] py-24 px-4">
+          {/* Background Floating Blobs */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-900/20 rounded-full blur-3xl animate-float" />
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#1ABC9C]/20 rounded-full blur-3xl animate-float" />
             <div
-              className="absolute top-3/4 right-1/4 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl animate-float"
+              className="absolute top-3/4 right-1/4 w-96 h-96 bg-[#0A2342]/40 rounded-full blur-3xl animate-float"
               style={{ animationDelay: "2s" }}
             />
             <div
-              className="absolute top-1/2 left-1/2 w-48 h-48 bg-pink-900/20 rounded-full blur-3xl animate-float"
+              className="absolute top-1/2 left-1/2 w-48 h-48 bg-[#20c997]/30 rounded-full blur-3xl animate-float"
               style={{ animationDelay: "4s" }}
             />
           </div>
@@ -150,58 +151,65 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.25, 0.25, 0.75] }}
             >
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight font-display">
-                Turning Your Vision Into
+              {/* 🔹 Tagline Centered */}
+              <div className="flex justify-center mb-6">
+                <div className="group relative flex max-w-fit flex-row items-center justify-center rounded-2xl px-5 py-[6px] whitespace-nowrap text-sm sm:text-lg font-medium shadow-[inset_0_-8px_10px_#0A2342] backdrop-blur-sm transition-shadow duration-500 ease-out [--bg-size:300%] hover:shadow-[inset_0_-5px_10px_#0A2342] dark:bg-black/40">
+                  <div className="absolute inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-[#1ABC9C]/60 via-[#0A2342]/60 to-[#1ABC9C]/60 bg-[length:var(--bg-size)_100%] p-[1px] ![mask-composite:subtract] rounded-2xl [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]"></div>
+                  <span className="relative bg-gradient-to-r from-teal-400 to-teal-200 bg-clip-text text-transparent tracking-tight">
+                    Innovative Solutions, Seamless Experience
+                  </span>
+                </div>
+              </div>
+
+              {/* 🔹 Heading with extra gap below tagline */}
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight font-display">
+                Futuremap Your Digital Vision with Next-Gen Technology
                 <motion.span
-                  className="block mt-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                  className="block mt-2 bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  Digital Brilliance
                 </motion.span>
               </h1>
-            </motion.div>
 
-            <motion.p
-              className="text-xl text-black mb-10 text-center max-w-5xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              We are a next-generation software agency specializing in Web Development, Mobile Apps, Landing Pages, and AI Integrations. Our mission is to deliver high-performance, user-centric digital solutions that drive growth and transform ideas into reality.
-            </motion.p>
 
-            <motion.div
-              className="flex flex-col sm:flex-row gap-6 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <Button
-                size="lg"
-                className="text-lg px-10 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-2xl hover:shadow-blue-500/20 hover:scale-105 transition-all duration-300 animate-pulse-glow border border-blue-400/20"
-                asChild
+              {/* 🔹 Paragraph with more gap */}
+              <motion.p
+                className="font-primary text-white text-center text-[1rem]  leading-6 sm:text-[27px]  mb-8 sm:leading-10 w-[80vw] font-Lexend"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <Link href="/contact">
-                  <Rocket className="mr-2 h-5 w-5" />
-                  Get a Quote
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-10 py-6 bg-gray-900/50 backdrop-blur-sm border-2 border-gray-800 hover:border-blue-500/50 hover:bg-gray-800/50 hover:scale-105 transition-all duration-300 rounded-xl shadow-lg text-gray-200 hover:text-white"
-                asChild
+                From Concept to Execution: Shaping the Future of Businesses
+              </motion.p>
+
+
+              {/* 🔹 CTAs */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-6 justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <Link href="/projects">
-                  <Globe className="mr-2 h-5 w-5" />
-                  View Our Work
-                </Link>
-              </Button>
+                {/* Primary CTA */}
+                <Button
+                  size="lg"
+                  className="text-lg px-10 py-6 bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] hover:from-[#20c997] hover:to-[#081a33] text-white font-semibold rounded-xl shadow-2xl hover:shadow-[#1ABC9C]/30 hover:scale-105 transition-all duration-300 animate-pulse-glow border border-[#1ABC9C]/20"
+                  asChild
+                >
+                  <Link href="/contact">
+                    
+                    Get In Touch
+                    
+                  </Link>
+                </Button>
+
+                
+              </motion.div>
             </motion.div>
           </div>
+
         </section>
 
         {/* Tech Stack Section */}
