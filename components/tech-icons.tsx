@@ -28,9 +28,12 @@ import {
   SiLaravel,
   SiDjango,
   SiFlask,
+  SiNestjs,
+  SiGit,
+  SiVercel,
 } from "react-icons/si"
 
-import { FaSass } from "react-icons/fa";
+import { FaSass, FaCode } from "react-icons/fa";
 
 
 export const techIcons: Record<
@@ -67,7 +70,12 @@ export const techIcons: Record<
   Figma: SiFigma,
   Supabase: SiSupabase,
   Bootstrap: SiBootstrap,
-  Sass: FaSass, // 🆕 SaaS mapping
+  Sass: FaSass,
+  NestJS: SiNestjs,
+  Git: SiGit,
+  Vercel: SiVercel,
+  "Visual Studio": FaCode
+
 }
 
 // 🎨 Brand colors mapping
@@ -103,6 +111,11 @@ const techColors: Record<string, string> = {
   Supabase: "#3ECF8E",
   Bootstrap: "#7952B3",
   Sass: "pink",
+  NestJS: "#E0234E",
+  Git: "#F05032",
+  Vercel: "#000000",
+  "Visual Studio": "#007ACC"
+
 }
 
 export function TechIcon({
