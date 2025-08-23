@@ -37,7 +37,7 @@ export function FloatingCTA() {
           transition={{ duration: 0.4, ease: "easeInOut" }}
           className="fixed bottom-4 inset-x-0 flex justify-center px-4 z-50"
         >
-          <div className="w-full max-w-3xl bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center sm:justify-between gap-3 sm:gap-4 backdrop-blur-md">
+          <div className="w-full max-w-3xl bg-white border border-gray-200 rounded-2xl shadow-2xl px-4 sm:px-6 py-3 flex flex-col sm:flex-row items-center sm:justify-between gap-3 sm:gap-4 backdrop-blur-md">
 
             {/* Logo + Tagline */}
             <div className="flex items-center gap-2 text-center sm:text-left">
@@ -48,8 +48,12 @@ export function FloatingCTA() {
                 height={36}
                 className="rounded-md"
               />
-              <p className="text-sm text-gray-300">
-                Giving <span className="text-blue-500 font-semibold">Client</span> their time back.
+              <p className="text-sm text-gray-700">
+                Giving{" "}
+                <span className="bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent font-semibold">
+                  Client
+                </span>{" "}
+                their time back.
               </p>
             </div>
 
@@ -57,7 +61,7 @@ export function FloatingCTA() {
             <div className="flex gap-2 sm:gap-3 w-full sm:w-auto justify-center">
               <Button
                 size="sm"
-                className="flex-1 sm:flex-none bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                className="flex-1 sm:flex-none bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] text-white hover:opacity-90 transition-all"
                 asChild
               >
                 <Link href="/services">Pricing</Link>
@@ -65,7 +69,7 @@ export function FloatingCTA() {
               <Button
                 variant="outline"
                 size="sm"
-                className="flex-1 sm:flex-none border-gray-600 bg-gradient-to-r from-amber-300 to-yellow-300 text-gray-900 hover:from-amber-400 hover:to-yellow-400 transition-all duration-300"
+                className="flex-1 sm:flex-none border border-gray-300 bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent hover:opacity-80 transition-all duration-300"
                 asChild
               >
                 <a
@@ -81,7 +85,6 @@ export function FloatingCTA() {
         </motion.div>
       )}
     </AnimatePresence>
-
   )
 }
 

@@ -236,12 +236,21 @@
   }
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
-.animate-marquee:hover {
-  animation-play-state: paused;
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
 }
 
 /* Added floating animation for hero elements */
@@ -336,4 +345,26 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+  perspective-origin: center;
+}
+
+.animate-marquee, .animate-marquee-vertical {
+  will-change: transform;
+  backface-visibility: hidden; /* Helps with 3D rendering */
+}
+@keyframes skew-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-skew-scroll {
+  animation: skew-scroll 25s linear infinite;
 }

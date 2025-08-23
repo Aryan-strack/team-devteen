@@ -230,7 +230,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <div className="min-h-screen bg-background py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#F8FAFC] to-[#E2E8F0] py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Back Button */}
         <div className="mb-8">
@@ -258,11 +258,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">{project.title}</h1>
+          {/* 👇 Gradient Title */}
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent mb-4">
+            {project.title}
+          </h1>
 
-          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">{project.longDescription}</p>
+          <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            {project.longDescription}
+          </p>
 
-          <div className="flex gap-4">
+          {/* <div className="flex gap-4">
             {project.liveUrl && (
               <Button asChild>
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -279,7 +284,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 </a>
               </Button>
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* Project Image */}
@@ -298,7 +303,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div className="lg:col-span-2 space-y-12">
             {/* Features */}
             <section>
-              <h2 className="text-2xl font-bold text-foreground mb-6">Key Features</h2>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent mb-6">
+                Key Features
+              </h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {project.features.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
@@ -311,10 +318,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* Technologies */}
             <section>
-              <h2 className="text-2xl font-bold text-foreground mb-6">Technologies Used</h2>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent mb-6">
+                Technologies Used
+              </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {project.technologies.map((tech) => (
-                  <Card key={tech} className="text-center hover:shadow-md transition-all duration-300">
+                  <Card
+                    key={tech}
+                    className="text-center hover:shadow-md transition-all duration-300"
+                  >
                     <CardContent className="p-4">
                       <div className="flex justify-center mb-2">
                         <TechIcon tech={tech} className="h-8 w-8 text-primary" />
@@ -328,7 +340,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* Results */}
             <section>
-              <h2 className="text-2xl font-bold text-foreground mb-6">Results & Impact</h2>
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent mb-6">
+                Results & Impact
+              </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 {project.results.map((result, index) => (
                   <Card key={index} className="border-border/50">
@@ -348,8 +362,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div className="space-y-8">
             {/* Project Info */}
             <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle>Project Details</CardTitle>
+              <CardHeader className="py-4 px-3">
+                <CardTitle className="bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
+                  Project Details
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -373,22 +389,32 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
             {/* Testimonial */}
             <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle>Client Testimonial</CardTitle>
+              <CardHeader className="py-4 px-3">
+                <CardTitle className="bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
+                  Client Testimonial
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <blockquote className="text-muted-foreground italic mb-4">&quot;{project.testimonial.text}&quot;</blockquote>
+                <blockquote className="text-muted-foreground italic mb-4">
+                  &quot;{project.testimonial.text}&quot;
+                </blockquote>
                 <div>
-                  <p className="font-semibold text-foreground">{project.testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{project.testimonial.position}</p>
+                  <p className="font-semibold text-foreground">
+                    {project.testimonial.author}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {project.testimonial.position}
+                  </p>
                 </div>
               </CardContent>
             </Card>
 
             {/* CTA */}
-            <Card className="border-border/50 bg-gradient-to-br from-primary/5 to-accent/5">
+            <Card className="border-border/50 bg-gradient-to-br from-[#1ABC9C]/10 to-[#0A2342]/10">
               <CardContent className="p-6 text-center">
-                <h3 className="font-bold text-foreground mb-2">Interested in Similar Work?</h3>
+                <h3 className="font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent mb-2">
+                  Interested in Similar Work?
+                </h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Let&apos;s discuss how we can help bring your vision to life.
                 </p>
@@ -401,6 +427,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
       </div>
     </div>
+
   )
 }
 

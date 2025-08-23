@@ -108,27 +108,36 @@ export default function ContactPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-background py-20 px-4 flex items-center justify-center">
-        <Card className="max-w-md mx-auto text-center">
+      <div className="min-h-screen bg-gradient-to-b from-primary/10 via-background to-muted/20 py-20 px-4 flex items-center justify-center">
+        <Card className="max-w-md mx-auto text-center shadow-xl rounded-2xl">
           <CardContent className="p-8">
             <CheckCircle className="h-16 w-16 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-foreground mb-4">Message Sent!</h2>
+
+            {/* Gradient Text */}
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent mb-4">
+              Message Sent!
+            </h2>
+
             <p className="text-muted-foreground mb-6">
               Thank you for reaching out. We&apos;ll get back to you within 24 hours.
             </p>
+
             <Button onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
           </CardContent>
         </Card>
       </div>
+
     );
   }
 
   return (
-    <div className="min-h-screen bg-background py-20 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#1ABC9C]/10 via-background to-[#0A2342]/10 py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Get in Touch</h1>
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent mb-6">
+            Get in Touch
+          </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Ready to start your project? Have questions about our services? We&apos;d love to hear from you.
             Let&apos;s discuss how we can help bring your vision to life.
@@ -138,10 +147,12 @@ export default function ContactPage() {
         <div className="grid lg:grid-rows-2 gap-12">
           {/* Contact Form */}
           <div>
-            <Card className="border-border/50">
+            <Card className="border-border/50 shadow-lg rounded-2xl">
               <CardHeader>
-                <CardTitle className="text-2xl">Send us a Message</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-2xl bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent px-4 pt-4">
+                  Send us a Message
+                </CardTitle>
+                <CardDescription className="px-4 pb-4">
                   {serviceQP
                     ? `Interested in our ${serviceQP} service? Fill out the form below and we'll get back to you with detailed information.`
                     : "Fill out the form below and we'll get back to you as soon as possible."}
@@ -232,11 +243,13 @@ export default function ContactPage() {
                     <p className="text-sm text-destructive -mt-2">{serverError}</p>
                   )}
 
-                  <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                  <Button type="submit" className="w-full text-lg py-6 rounded-xl bg-gradient-to-r from-[#1ABC9C] to-[#0A2342]
+                    hover:from-[#20c997] hover:to-[#081a33] text-white cursor-pointer"
+                    size="lg" disabled={isSubmitting}>
                     {isSubmitting ? "Sending..." : (
                       <>
                         Send Message
-                        <Send className="ml-2 h-4 w-4" />
+                        <Send className="ml-2 h-5 w-5" />
                       </>
                     )}
                   </Button>
@@ -247,16 +260,20 @@ export default function ContactPage() {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <Card className="border-border/50">
+            <Card className="border-border/50 shadow-lg rounded-2xl">
               <CardHeader>
-                <CardTitle className="text-xl">Contact Information</CardTitle>
-                <CardDescription>Reach out to us through any of these channels.</CardDescription>
+                <CardTitle className="text-xl bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent px-4 pt-4">
+                  Contact Information
+                </CardTitle>
+                <CardDescription className="px-4 pb-4">Reach out to us through any of these channels.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <Phone className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-foreground">Phone</h3>
+                    <h3 className="font-semibold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
+                      Phone
+                    </h3>
                     <p className="text-muted-foreground">+1 (555) 123-4567</p>
                   </div>
                 </div>
@@ -264,7 +281,9 @@ export default function ContactPage() {
                 <div className="flex items-start space-x-4">
                   <Mail className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-foreground">Email</h3>
+                    <h3 className="font-semibold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
+                      Email
+                    </h3>
                     <p className="text-muted-foreground">hello@devteen.com</p>
                   </div>
                 </div>
@@ -272,7 +291,9 @@ export default function ContactPage() {
                 <div className="flex items-start space-x-4">
                   <Clock className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="font-semibold text-foreground">Business Hours</h3>
+                    <h3 className="font-semibold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
+                      Business Hours
+                    </h3>
                     <p className="text-muted-foreground">
                       Monday - Friday: 9:00 AM - 6:00 PM PST
                       <br />
@@ -283,10 +304,12 @@ export default function ContactPage() {
                   </div>
                 </div>
               </CardContent>
+
             </Card>
           </div>
         </div>
       </div>
     </div>
+
   );
 }
