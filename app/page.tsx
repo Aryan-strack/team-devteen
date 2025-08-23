@@ -12,7 +12,6 @@ import {
   Lightbulb,
 } from "lucide-react"
 
-import TestShowcase from "@/components/techshowcase"
 
 import Link from "next/link"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -21,7 +20,7 @@ import { motion } from "framer-motion"
 
 import { CounterAnimation } from "@/components/counter-animation"
 import { FloatingCTA } from "@/components/floating-cta"
-
+import  TechShowcase  from "@/components/tech-show"
 
 import Image from "next/image"
 
@@ -325,8 +324,8 @@ export default function HomePage() {
             </div>
           </section>
 
-          <TestShowcase />
-          
+          <TechShowcase />
+
           {/* {Stats Section} */}
           <section className="relative py-24 px-6 bg-gradient-to-b from-[#0A2342] via-[#0d2f55] to-[#0A2342] border-b border-[#1ABC9C]/30 overflow-hidden">
             <div className="container mx-auto max-w-7xl">
