@@ -114,14 +114,14 @@ export function Navigation() {
               <div className="flex flex-col h-full">
                 <div className="flex flex-col space-y-8 pt-8 pb-6">
                   {/* Mobile Logo */}
-                  <div className="flex items-center space-x-2 px-4">
+                  {/* <div className="flex items-center space-x-2 px-4">
                     <div className="w-8 h-8 bg-gradient-to-br from-[#1ABC9C] to-[#20c997] rounded-lg flex items-center justify-center shadow-md">
                       <Code2 className="h-4 w-4 text-[#0A2342]" />
                     </div>
                     <span className="text-xl font-bold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
                       DevTeen
                     </span>
-                  </div>
+                  </div> */}
 
                   {/* Mobile Nav */}
                   <nav className="flex flex-col space-y-1">
