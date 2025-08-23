@@ -12,7 +12,7 @@ import {
   Lightbulb,
 } from "lucide-react"
 
-import TechShowcase from "@/components/TechShowcase"
+import TestShowcase from "@/components/techshowcase"
 
 import Link from "next/link"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -325,7 +325,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          <TechShowcase />
+          <TestShowcase />
           
           {/* {Stats Section} */}
           <section className="relative py-24 px-6 bg-gradient-to-b from-[#0A2342] via-[#0d2f55] to-[#0A2342] border-b border-[#1ABC9C]/30 overflow-hidden">
