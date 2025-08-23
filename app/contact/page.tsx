@@ -284,7 +284,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold bg-gradient-to-r from-[#1ABC9C] to-[#0A2342] bg-clip-text text-transparent">
                       Email
                     </h3>
-                    <p className="text-muted-foreground">hello@devteen.com</p>
+                    <p className="text-muted-foreground">devteen11@gmail.com</p>
                   </div>
                 </div>
 
@@ -297,9 +297,7 @@ export default function ContactPage() {
                     <p className="text-muted-foreground">
                       Monday - Friday: 9:00 AM - 6:00 PM PST
                       <br />
-                      Saturday: 10:00 AM - 2:00 PM PST
-                      <br />
-                      Sunday: Closed
+                    Saturday - Sunday: Closed
                     </p>
                   </div>
                 </div>

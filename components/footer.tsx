@@ -61,7 +61,7 @@ export function Footer() {
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-3 text-gray-600">
                 <MapPin className="h-4 w-4 text-[#1ABC9C]" />
-                <span>123 Innovation Drive, San Francisco, CA</span>
+                <span>Lahore, Punjab, Pakistan</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Phone className="h-4 w-4 text-[#1ABC9C]" />
@@ -69,7 +69,7 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-3 text-gray-600">
                 <Mail className="h-4 w-4 text-[#1ABC9C]" />
-                <span>hello@devteen.com</span>
+                <span>devteen11@gmail.com</span>
               </div>
             </div>
           </div>

@@ -28,13 +28,13 @@ const pricingPlans = [
   },
   {
     name: "Web Development",
-    price: "$2000",
+    price: "$1500",
     period: "+ tax / starting-from",
     description: "Full-stack website solutions tailored for your business needs.",
     features: [
       "Custom website design & development",
       "Responsive & SEO optimized",
-      "CMS integration (WordPress, Strapi, etc.)",
+      "backend integration (Node.js, Firebase, etc.)",
       "E-commerce functionality (optional)",
       "Hosting & deployment setup",
       "3-month support included",
